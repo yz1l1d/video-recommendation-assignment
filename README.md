@@ -9,45 +9,50 @@ Design a recommendation algorithm that suggests videos based on user preferences
 
 The dataset can be fetched using the following APIs, which provide information on user interactions and video metadata:
 
-- **Base URL**: `https://api.socialverseapp.com`
-
 ### APIs
 
-1. **Get All Viewed Posts of Users**:
+1. **Get All Viewed Posts**:
    ```
-   {{base_url}}/posts/view?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
-   ```
-
-2. **Get All Liked Posts of Users**:
-   ```
-   {{base_url}}/posts/like?page=1&page_size=5&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
+   https://api.socialverseapp.com/posts/view?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
 
-3. **Get All User Ratings**:
+2. **Get All Liked Posts**:
    ```
-   {{base_url}}/posts/rating?page=1&page_size=5&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
-   ```
-
-4. **Get All Posts**:
-   ```
-   {{base_url}}/posts/summary/get?page=1&page_size=1000
+   https://api.socialverseapp.com/posts/like?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
 
-5. **Get All Users**:
+3. **Get All Inspired posts**:
    ```
-   {{base_url}}/users/get_all?page=1&page_size=1000
+   {{base_url}}/posts/inspire?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
+   ```
+
+
+4. **Get All Rated posts**:
+   ```
+   https://api.socialverseapp.com/posts/rating?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
+   ```
+
+5. **Get All Posts** (Header required*):
+   ```
+   https://api.socialverseapp.com/posts/summary/get?page=1&page_size=1000
+   ```
+
+6. **Get All Users** (Header required*):
+   ```
+   https://api.socialverseapp.com/users/get_all?page=1&page_size=1000
    ```
 
 ### Authorization
 
-For each API request, include the following header:
-- **Flic-Token**: `"flic_1e01009f9c1a54706f385bcc1993a08fd9647ba8f499572d280654d1c03c47bf"`
+For autherization pass `Flic-Token` as header in the API request:
+Header:
+`Flic-Token`: `"flic_6e2d8d25dc29a4ddd382c2383a903cf4a688d1a117f6eb43b35a1e7fadbb84b8"`
+
 
 ### Requirements
 
-1. **Personalization:** The recommendation algorithm should make personalized suggestions based on user history and engagement patterns with similar videos.
-2. **Cold Start Problem Handling:** Include a mechanism to recommend videos for new users without prior interaction history.
-3. **Trending Content:** Account for recent trends and popularity boosts in recommendations.
+1. **Personalization:** The recommendation algorithm should make personalized suggestions based on user history and engagement patterns.
+2. **Cold Start Problem Handling:** Include a mechanism to recommend videos for new users without prior interaction history (hint: you can use user mood here).
 
 ## 🛠️ Specific Tasks
 
@@ -64,27 +69,67 @@ For each API request, include the following header:
 
 ### 3. Evaluation Metrics
    - Implement metrics to measure recommendation quality, such as:
-     - **Click-through rate (CTR):** To assess user engagement.
-     - **Mean Average Precision (MAP):** For ranking precision in relevance.
+     - **Mean Absolute Error (MAE):**
+     - **Root Mean Square Error (RMSE):**
    - Summarize results and insights gained from metric evaluations.
 
 ### 4. Documentation
    - Provide clear, step-by-step documentation of the approach, model architecture, and key decisions made during development.
-   - Discuss any challenges and solutions.
+   - Craete 3 API endpoint where I am going to give you `username`, `category_id` and `mood`
+   - endpoint should be like (In single API call routes will return 10 posts whcih are recomended for user)
+   - `http://localhost:port_no/feed?username=your_username&category_id=category_id_user_want_to_see&mood=user_current_mood
+   - `http://localhost:port_no/feed?username=your_username&category_id=category_id_user_want_to_see
+   - `http://localhost:port_no/feed?username=your_username
 
-## 📦 Deliverables
+## Submission Guidelines
+### Code Repository Requirements
+1. Submit a complete GitHub repository containing:
+   - Properly structured code
+   - Testable implementation
+   - Clear documentation
+   - README.md file must include setup instructions
 
-1. **Preprocessed Dataset:** A dataset ready for use by the recommendation model.
-2. **Codebase:** A well-documented code repository with API calls and recommendation algorithms.
-3. **Evaluation Results:** Metrics showing the performance of the recommendation system.
-4. **Documentation:** Explanations of the approach, model, and reasoning (README.md file).
-5. **Video subbmition:** Explain your work in a video explaination with a small intro of yourself.
+### Video Presentation Requirements
+1. Record a 5-minute (maximum) video explaining:
+   - Project setup and running instructions
+   - Code walkthrough
+   - Brief self-introduction
+2. Upload the video directly to Internshalla or Google Drive and share the video link with your submission
 
-## 🎬 Notes
+**Note:** Submission requirements must be completely met do avoid disqualification.
 
-- This assignment evaluates your skills in data handling, recommendation design, and performance evaluation.
-- You’re encouraged to explore additional features if they could enhance the recommendation quality.
-- For any queries you can message on telegram: https://t.me/+VljbLT8o75QxN2I9
-- Kindly do not ask silly question, do proper RND before asking any question, so we can give you best answer of your question.
+## Evaluation Criteria
 
-Happy coding and good luck! 🌟
+Submissions will be evaluated based on:
+
+1. **Code Quality**
+   - Organization and structure
+   - Readability
+   - Efficiency and performance
+   - Best practices implementation
+
+2. **Functionality**
+   - Successful video search implementation
+   - Proper upload mechanism
+   - Error handling
+   - Feature completeness
+
+3. **Documentation**
+   - Clear setup instructions
+   - Detailed usage guidelines
+   - Code comments and documentation
+   - README.md completeness
+
+4. **Presentation**
+   - Video explanation
+   - Clear communication
+   - Technical understanding
+   - Time management
+
+## Results
+
+- Shortlisted candidates will be notified within 24 hours of project evaluation.
+
+For any questions about the submission process, please reach out to me on [Telegram](https://t.me/+VljbLT8o75QxN2I9).
+
+Good luck with your submission!
