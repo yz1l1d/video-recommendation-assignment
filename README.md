@@ -46,8 +46,9 @@ The dataset can be fetched using the following APIs, which provide information o
 
 For autherization pass `Flic-Token` as header in the API request:
 Header:
-`Flic-Token`: `"flic_6e2d8d25dc29a4ddd382c2383a903cf4a688d1a117f6eb43b35a1e7fadbb84b8"`
-
+```json
+Flic-Token`: `"flic_6e2d8d25dc29a4ddd382c2383a903cf4a688d1a117f6eb43b35a1e7fadbb84b8"
+```
 
 ### Requirements
 
