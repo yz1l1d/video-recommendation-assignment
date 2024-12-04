@@ -1,5 +1,6 @@
 
 # 🎥 Video Recommendation Algorithm Assignment
+To see what kind of motivational content you have to recommend, take reference from our Empowerverse App [ANDROID](https://play.google.com/store/apps/details?id=com.empowerverse.app) || [iOS](https://apps.apple.com/us/app/empowerverse/id6449552284).
 
 ## 🎯 Objective
 
