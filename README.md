@@ -8,7 +8,8 @@ Design a recommendation algorithm that suggests videos based on user preferences
 
 ## 📊 Dataset
 
-The dataset can be fetched using the following APIs, which provide information on user interactions and video metadata:
+The dataset can be fetched using the following APIs, which provide information on user interactions and video metadata: 
+Make sure using using pagination to fetch data and managing the data fetching method in a way that it's not fetching same data again and again.
 
 ### APIs
 
