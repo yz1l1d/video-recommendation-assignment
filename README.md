@@ -13,33 +13,33 @@ Make sure using using pagination to fetch data and managing the data fetching me
 
 ### APIs
 
-1. **Get All Viewed Posts**:
+1. **Get All Viewed Posts** (METHOD: GET):
    ```
    https://api.socialverseapp.com/posts/view?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
 
-2. **Get All Liked Posts**:
+2. **Get All Liked Posts** (METHOD: GET):
    ```
    https://api.socialverseapp.com/posts/like?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
 
-3. **Get All Inspired posts**:
+3. **Get All Inspired posts** (METHOD: GET):
    ```
    https://api.socialverseapp.com/posts/inspire?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
 
 
-4. **Get All Rated posts**:
+4. **Get All Rated posts** (METHOD: GET):
    ```
    https://api.socialverseapp.com/posts/rating?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
 
-5. **Get All Posts** (Header required*):
+5. **Get All Posts** (Header required*) (METHOD: GET):
    ```
    https://api.socialverseapp.com/posts/summary/get?page=1&page_size=1000
    ```
 
-6. **Get All Users** (Header required*):
+6. **Get All Users** (Header required*) (METHOD: GET):
    ```
    https://api.socialverseapp.com/users/get_all?page=1&page_size=1000
    ```
