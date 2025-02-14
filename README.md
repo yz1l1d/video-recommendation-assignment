@@ -1,45 +1,116 @@
+# Video Recommendation Engine
 
-# 🎥 Video Recommendation Algorithm Assignment
-To see what kind of motivational content you have to recommend, take reference from our Empowerverse App [ANDROID](https://play.google.com/store/apps/details?id=com.empowerverse.app) || [iOS](https://apps.apple.com/us/app/empowerverse/id6449552284).
+A sophisticated recommendation system that suggests personalized video content based on user preferences and engagement patterns using deep neural networks. Ref: to see what kind of motivational content you have to recommend, take reference from our Empowerverse App [ANDROID](https://play.google.com/store/apps/details?id=com.empowerverse.app) || [iOS](https://apps.apple.com/us/app/empowerverse/id6449552284).
 
-## 🎯 Objective
+## 🎯 Project Overview
 
-Design a recommendation algorithm that suggests videos based on user preferences and engagement patterns. The algorithm will deliver personalized video recommendations by leveraging user interaction data and video metadata obtained via provided APIs.
+This project implements a video recommendation algorithm that:
 
-## 📊 Dataset
+- Delivers personalized content recommendations
+- Handles cold start problems using mood-based recommendations
+- Utilizes deep neural networks for content analysis
+- Integrates with external APIs for data collection
+- Implements efficient data caching and pagination
 
-The dataset can be fetched using the following APIs, which provide information on user interactions and video metadata: 
-Make sure using using pagination to fetch data and managing the data fetching method in a way that it's not fetching same data again and again.
+## 🛠️ Technology Stack
+
+- **Backend Framework**: FastAPI
+- **Documentation**: Swagger/OpenAPI
+
+## 📋 Prerequisites
+
+- Virtual environment (recommended)
+
+## 🚀 Getting Started
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone <repository-url>
+   cd video-recommendation-engine
+   ```
+2. **Set Up Virtual Environment**
+
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+3. **Install Dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. **Configure Environment Variables**
+   Create a `.env` file in the root directory:
+
+   ```env
+
+   FLIC_TOKEN=your_flic_token
+   API_BASE_URL=https://api.socialverseapp.com
+   ```
+5. **Run Database Migrations**
+
+   ```bash
+   alembic upgrade head
+   ```
+6. **Start the Server**
+
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
+## 📊 API Endpoints
+
+### Main Recommendation Endpoints
+
+1. **Get Personalized Feed**
+
+   ```
+   GET /feed?username={username}
+   ```
+
+   Returns personalized video recommendations for a specific user.
+2. **Get Category-based Feed**
+
+   ```
+   GET /feed?username={username}&category_id={category_id}
+   ```
+
+   Returns category-specific video recommendations for a user.
+
+### Data Collection Endpoints (Internal Use)
+
+The system uses the following APIs for data collection:
 
 ### APIs
 
 1. **Get All Viewed Posts** (METHOD: GET):
+
    ```
    https://api.socialverseapp.com/posts/view?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
-
 2. **Get All Liked Posts** (METHOD: GET):
+
    ```
    https://api.socialverseapp.com/posts/like?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
-
 3. **Get All Inspired posts** (METHOD: GET):
+
    ```
    https://api.socialverseapp.com/posts/inspire?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
-
-
 4. **Get All Rated posts** (METHOD: GET):
+
    ```
    https://api.socialverseapp.com/posts/rating?page=1&page_size=1000&resonance_algorithm=resonance_algorithm_cjsvervb7dbhss8bdrj89s44jfjdbsjd0xnjkbvuire8zcjwerui3njfbvsujc5if
    ```
-
 5. **Get All Posts** (Header required*) (METHOD: GET):
+
    ```
    https://api.socialverseapp.com/posts/summary/get?page=1&page_size=1000
    ```
-
 6. **Get All Users** (Header required*) (METHOD: GET):
+
    ```
    https://api.socialverseapp.com/users/get_all?page=1&page_size=1000
    ```
@@ -49,91 +120,64 @@ Make sure using using pagination to fetch data and managing the data fetching me
 For autherization pass `Flic-Token` as header in the API request:
 
 Header:
+
 ```json
-"Flic-Token": "flic_6e2d8d25dc29a4ddd382c2383a903cf4a688d1a117f6eb43b35a1e7fadbb84b8"
+"Flic-Token": "flic_11d3da28e403d182c36a3530453e290add87d0b4a40ee50f17611f180d47956f"
 ```
 
-### Requirements
+**Note**: All external API calls require the Flic-Token header:
 
-1. **Personalization:** The recommendation algorithm should make personalized suggestions based on user history and engagement patterns.
-2. **Cold Start Problem Handling:** Include a mechanism to recommend videos for new users without prior interaction history (hint: you can use user mood here).
+## 🧮 Algorithm Implementation
 
-## 🛠️ Specific Tasks
+The recommendation engine uses a Deep Neural Network (DNN) architecture with the following components:
 
-### 1. Data Preprocessing
-   - Use the APIs provided to retrieve and preprocess video metadata and user interaction data.
-   - Handle missing values, normalize data, and create derived features as needed for the recommendation model.
+1. **Data Preprocessing**
 
-### 2. Algorithm Development
-   - Develop a recommendation algorithm using approaches such as:
-     - **Content-based filtering:** Recommending videos similar to those the user has viewed or liked.
-     - **Collaborative filtering:** Leveraging similar user preferences to enhance recommendations.
-     - **Hybrid models:** Combining content-based and collaborative filtering for improved accuracy.
-   - Justify the model selection and describe how it meets the project goals.
+   - Feature engineering
+   - Data normalization
+   - Missing value handling
+   - Categorical encoding
+2. **Model Architecture**
 
-### 3. Evaluation Metrics
-   - Implement metrics to measure recommendation quality, such as:
-     - **Mean Absolute Error (MAE):**
-     - **Root Mean Square Error (RMSE):**
-   - Summarize results and insights gained from metric evaluations.
+   - Embedding layers for categorical features
+   - Dense layers with ReLU activation
+   - Dropout for regularization
+   - Output layer with appropriate activation
+3. **Cold Start Handling**
 
-### 4. Documentation
-   - Provide clear, step-by-step documentation of the approach, model architecture, and key decisions made during development.
-   - Craete 3 API endpoint where I am going to give you `username`, `category_id` and `mood`
-   - endpoint should be like (In single API call routes will return 10 posts whcih are recomended for user)
-   - `http://localhost:port_no/feed?username=your_username&category_id=category_id_user_want_to_see&mood=user_current_mood
-   - `http://localhost:port_no/feed?username=your_username&category_id=category_id_user_want_to_see
-   - `http://localhost:port_no/feed?username=your_username
+   - Mood-based initial recommendations
+   - Content-based filtering fallback
+   - Popularity-based recommendations
 
-## Submission Guidelines
-### Code Repository Requirements
-1. Submit a complete GitHub repository containing:
-   - Properly structured code
-   - Testable implementation
-   - Clear documentation
-   - README.md file must include setup instructions
+## 📝 Submission Requirements
 
-### Video Presentation Requirements
-1. Record a 5-minute (maximum) video explaining:
-   - Project setup and running instructions
-   - Code walkthrough
-   - Brief self-introduction
-2. Upload the video directly to Internshalla or Google Drive and share the video link with your submission
+1. **GitHub Repository**
 
-**Note:** Submission requirements must be completely met do avoid disqualification.
+   - Complete source code
+   - This README.md file
+   - Postman collection
+   - Database migration scripts
+2. **Video Submission**
 
-## Evaluation Criteria
+   - Introduction Video (30-40 seconds)
+     - Personal introduction
+     - Project overview
+   - Technical Demo
+     - API demonstration using Postman
+     - Database operations
+     - Authentication flow
+3. **Notification**
 
-Submissions will be evaluated based on:
+   - Join the Telegram group: [Video Recommendation](https://t.me/+VljbLT8o75QxN2I9)
+   - Notify upon completion
 
-1. **Code Quality**
-   - Organization and structure
-   - Readability
-   - Efficiency and performance
-   - Best practices implementation
+## ✅ Evaluation Checklist
 
-2. **Functionality**
-   - Successful video search implementation
-   - Proper upload mechanism
-   - Error handling
-   - Feature completeness
-
-3. **Documentation**
-   - Clear setup instructions
-   - Detailed usage guidelines
-   - Code comments and documentation
-   - README.md completeness
-
-4. **Presentation**
-   - Video explanation
-   - Clear communication
-   - Technical understanding
-   - Time management
-
-## Results
-
-- Shortlisted candidates will be notified within 24 hours of project evaluation.
-
-For any questions about the submission process, please reach out to me on [Telegram](https://t.me/+VljbLT8o75QxN2I9).
-
-Good luck with your submission!
+- [ ] All APIs are functional
+- [ ] Database migrations work correctly
+- [ ] README is complete and clear
+- [ ] Postman collection is included
+- [ ] Videos are submitted
+- [ ] Code is well-documented
+- [ ] Implementation handles edge cases
+- [ ] Proper error handling is implemented
