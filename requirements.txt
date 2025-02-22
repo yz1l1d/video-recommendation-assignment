@@ -1,12 +1,8 @@
-fastapi==0.110.0
-uvicorn==0.29.0
-sqlalchemy==2.0.29
-alembic==1.13.1
-pydantic==2.6.1
-requests==2.31.0
-python-dotenv==1.0.1
-numpy==1.26.4
-pandas==2.2.1
-tensorflow==2.16.1
-torch==2.2.1
-scikit-learn==1.4.1.post1
+fastapi==0.95.0
+uvicorn==0.20.0
+pydantic==1.10.7
+requests==2.28.2
+tensorflow==2.12.0  # For DNN implementation
+numpy
+alembic==1.10.2     # For database migrations
+python-dotenv==1.0.0

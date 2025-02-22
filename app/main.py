@@ -1,10 +1,24 @@
 from fastapi import FastAPI
-from app.routes import data
+from dotenv import load_dotenv
+import os
+from app.api.routes import router  # Import API routes
 
-app = FastAPI()
+# Load environment variables
+load_dotenv()
+
+app = FastAPI(
+    title="Video Recommendation Engine",
+    description="A personalized video recommendation system",
+    version="1.0.0"
+)
+
+# Include API routes
+app.include_router(router)
 
 @app.get("/")
-def read_root():
+async def root():
     return {"message": "Welcome to the Video Recommendation Engine!"}
 
-app.include_router(data.router, prefix="/data", tags=["Data Collection"])
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
