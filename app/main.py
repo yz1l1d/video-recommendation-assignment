@@ -9,7 +9,9 @@ load_dotenv()
 app = FastAPI(
     title="Video Recommendation Engine",
     description="A personalized video recommendation system",
-    version="1.0.0"
+    version="1.0.0",
+    openapi_url="/openapi.json",
+    docs_url="/docs"
 )
 
 # Include API routes

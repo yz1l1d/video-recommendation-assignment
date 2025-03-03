@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-FLIC_TOKEN = os.getenv("FLIC_TOKEN")
-API_BASE_URL = os.getenv("API_BASE_URL")
+FLIC_TOKEN = os.getenv("FLIC_TOKEN") or ""
+API_BASE_URL = os.getenv("API_BASE_URL") or ""
 HEADERS = {"Flic-Token": FLIC_TOKEN}
 
 def fetch_user_data(endpoint: str, params: dict = None):
@@ -15,14 +15,12 @@ def fetch_user_data(endpoint: str, params: dict = None):
     return response.json()
 
 def get_user_feed(username: str):
-    # Example: Fetch viewed posts as a proxy for preferences
     params = {"page": 1, "page_size": 1000}
     viewed_posts = fetch_user_data("/posts/view", params)
-    # Placeholder: Replace with DNN inference
     return ["video1", "video2", "video3"]  # Mock recommendations
 
 def get_category_feed(username: str, category_id: str):
-    # Placeholder: Filter by category_id
     params = {"page": 1, "page_size": 1000}
-    all_posts = fetch_user_data("/posts/summary/get", params)
-    return [post for post in all_posts if post.get("category_id") == category_id][:3]
+    all_posts = fetch_user_data("/posts/summary/get", params).get("posts", [])
+    filtered_posts = [post for post in all_posts if str(post.get("category_id", "")) == category_id]
+    return [post.get("post_id", "unknown") for post in filtered_posts[:3]]

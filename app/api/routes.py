@@ -17,4 +17,4 @@ async def get_category_based_feed(username: str, category_id: str):
         feed = get_category_feed(username, category_id)
         return {"username": username, "category_id": category_id, "recommendations": feed}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Failed to fetch category feed: {str(e)}")
